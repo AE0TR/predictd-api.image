@@ -11,6 +11,9 @@ const { server } = require("./settings");
 
 const app = express();
 
+app.set('views', __dirname + '/views')
+app.set('view engine', 'pug')
+
 app.use(cors());
 app.use(logger("combined"));
 
