@@ -8,7 +8,15 @@ const toScalar = (data) => {
   return isNaN(n) ? data : n;
 };
 
+const toObject = (data, keys) => {
+  return toArray(data).reduce((acc, cur, idx) => {
+    acc[keys[idx]] = cur;
+    return acc;
+  }, {});
+};
+
 module.exports = {
+  obj: toObject,
   array: toArray,
   scalar: toScalar,
 };

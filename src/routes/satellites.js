@@ -13,7 +13,25 @@ router.get("/satellites", (req, res) => {
 
 router.get("/satellites/:name", (req, res) => {
   udp(endpoint.host, endpoint.port, `GET_SAT ${req.params.name}`).then((data) =>
-    res.json(as.array(data))
+    res.json(
+      as.obj(data, [
+        "name",
+        "longitude",
+        "latitude",
+        "azimuth",
+        "elevation",
+        "nextEvent",
+        "footprint",
+        "range",
+        "altitude",
+        "velocity",
+        "orbitNum",
+        "visibility",
+        "orbitalPhase",
+        "eclipse",
+        "squint",
+      ])
+    )
   );
 });
 

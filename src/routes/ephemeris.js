@@ -8,13 +8,29 @@ const { endpoint } = require("../settings");
 
 router.get("/ephemeris/sun", (req, res) => {
   udp(endpoint.host, endpoint.port, "GET_SUN").then((data) =>
-    res.json(as.array(data))
+    res.json(
+      as.obj(data, [
+        "azimuth",
+        "elevation",
+        "declination",
+        "hourAngle",
+        "rightAscension",
+      ])
+    )
   );
 });
 
 router.get("/ephemeris/moon", (req, res) => {
   udp(endpoint.host, endpoint.port, "GET_SUN").then((data) =>
-    res.json(as.array(data))
+    res.json(
+      as.obj(data, [
+        "azimuth",
+        "elevation",
+        "declination",
+        "hourAngle",
+        "rightAscension",
+      ])
+    )
   );
 });
 

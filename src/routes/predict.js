@@ -7,7 +7,7 @@ const as = require("../as");
 
 router.get(["/predict", "/predict/qth"], (req, res) => {
   udp(endpoint.host, endpoint.port, "GET_QTH").then((data) =>
-    res.json(as.array(data))
+    res.json(as.obj(data, ["callsign", "latitude", "longitude", "altitude"]))
   );
 });
 
