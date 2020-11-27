@@ -41,29 +41,3 @@ const connect = (host, port, packet) => {
 };
 
 module.exports = connect
-
-// module.exports = function (RED) {
-//   function Dgram(config) {
-//     RED.nodes.createNode(this, config);
-
-//     this.host = config.host;
-//     this.port = config.port;
-
-//     var node = this;
-//     node.on("input", function (msg) {
-//       const host = msg.host || node.host;
-//       const port = Number.parseInt(msg.port || node.port);
-
-//       connect(host, port, msg.payload)
-//         .then((resp) => {
-//           msg.payload = resp;
-//           node.send(msg);
-//         })
-//         .catch((err) => {
-//           node.debug(err);
-//           node.send();
-//         });
-//     });
-//   }
-//   RED.nodes.registerType("dgram", Dgram);
-// };

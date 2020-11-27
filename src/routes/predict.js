@@ -3,10 +3,11 @@ const router = express.Router();
 
 const { endpoint } = require("../settings");
 const udp = require("../udp");
+const as = require("../as");
 
 router.get(["/predict", "/predict/qth"], (req, res) => {
   udp(endpoint.host, endpoint.port, "GET_QTH").then((data) =>
-    res.json(data.trim().split("\n"))
+    res.json(as.array(data))
   );
 });
 
