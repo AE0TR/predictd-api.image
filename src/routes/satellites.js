@@ -1,18 +1,17 @@
 const express = require("express");
 const router = express.Router();
-
-const { endpoint } = require("../settings");
-const udp = require("../udp");
+const send = require("../udp")(
+  process.env.PREDICTD_HOST || "localhost",
+  process.env.PREDICTD_PORT || 1210
+);
 const as = require("../as");
 
 router.get("/satellites", (req, res) => {
-  udp(endpoint.host, endpoint.port, "GET_LIST").then((data) =>
-    res.json(as.array(data))
-  );
+  send("GET_LIST").then((data) => res.json(as.array(data)));
 });
 
 router.get("/satellites/:name", (req, res) => {
-  udp(endpoint.host, endpoint.port, `GET_SAT ${req.params.name}`).then((data) =>
+  send(`GET_SAT ${req.params.name}`).then((data) =>
     res.json(
       as.obj(data, [
         "name",
@@ -44,7 +43,7 @@ router.get("/satellites/:name/doppler", (req, res) => {
 });
 
 router.get("/satellites/:name/tle", (req, res) => {
-  udp(endpoint.host, endpoint.port, `GET_TLE ${req.params.name}`).then((data) =>
+  send(`GET_TLE ${req.params.name}`).then((data) =>
     res.json(data.trim().split("\n"))
   );
 });
@@ -66,7 +65,7 @@ router.get("/satellites/:name/predict/:start", (req, res) => {
 });
 
 router.get("/satellites/:name/predict", (req, res) => {
-  udp(endpoint.host, endpoint.port, `PREDICT ${req.params.name}`).then((data) =>
+  send(`PREDICT ${req.params.name}`).then((data) =>
     res.json(data.trim().split("\n"))
   );
 });

@@ -3,16 +3,16 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const indexRoute = require("./routes/index");
-const satRoute = require("./routes/satellites")
-const sysRoute = require("./routes/predict")
-const ephemRoute = require("./routes/ephemeris")
+const satRoute = require("./routes/satellites");
+const sysRoute = require("./routes/predict");
+const ephemRoute = require("./routes/ephemeris");
 
-const { server } = require("./settings");
+const server = require("./settings");
 
 const app = express();
 
-app.set('views', __dirname + '/views')
-app.set('view engine', 'pug')
+app.set("views", __dirname + "/views");
+app.set("view engine", "pug");
 
 app.use(cors());
 app.use(logger("combined"));

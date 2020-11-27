@@ -40,4 +40,10 @@ const connect = (host, port, packet) => {
   });
 };
 
-module.exports = connect
+const connector = (host, port)=>{
+  return data =>{
+    return connect(host,port,data);
+  }
+}
+
+module.exports = connector

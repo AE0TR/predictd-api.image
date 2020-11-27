@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-
-const udp = require("../udp");
+const send = require("../udp")(
+  process.env.PREDICTD_HOST || "localhost",
+  process.env.PREDICTD_PORT || 1210
+);
 const as = require("../as");
 
-const { endpoint } = require("../settings");
-
 router.get("/ephemeris/sun", (req, res) => {
-  udp(endpoint.host, endpoint.port, "GET_SUN").then((data) =>
+  send("GET_SUN").then((data) =>
     res.json(
       as.obj(data, [
         "azimuth",
@@ -21,7 +21,7 @@ router.get("/ephemeris/sun", (req, res) => {
 });
 
 router.get("/ephemeris/moon", (req, res) => {
-  udp(endpoint.host, endpoint.port, "GET_SUN").then((data) =>
+  send("GET_SUN").then((data) =>
     res.json(
       as.obj(data, [
         "azimuth",
