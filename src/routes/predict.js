@@ -7,7 +7,7 @@ const send = require("../udp")(
 );
 const as = require("../as");
 
-router.get(["/predict", "/predict/qth"], (req, res) => {
+router.get(["/sys", "/sys/qth"], (req, res) => {
   send("GET_QTH").then((data) => {
     const info = as.obj(data, [
       "callsign",
@@ -20,19 +20,19 @@ router.get(["/predict", "/predict/qth"], (req, res) => {
   });
 });
 
-router.get("/predict/version", (req, res) => {
+router.get("/sys/version", (req, res) => {
   send("GET_VERSION").then((data) => res.json(data.trim()));
 });
 
-router.get("/predict/mode", (req, res) => {
+router.get("/sys/mode", (req, res) => {
   send("GET_MODE").then((data) => res.json(data.trim()));
 });
 
-router.get("/predict/time", (req, res) => {
+router.get("/sys/time", (req, res) => {
   send("GET_TIME").then((data) => res.json(+data.trim()));
 });
 
-router.get("/predict/tle", (req, res) => {
+router.get("/sys/tle", (req, res) => {
   send("RELOAD_TLE").then((data) => res.json("tle reloaded"));
 });
 
