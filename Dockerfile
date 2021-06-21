@@ -1,11 +1,11 @@
-FROM node:alpine
+FROM node:alpine3.12
 
 WORKDIR /data
 
 COPY ./src/ /data/
 COPY package.json /data 
 
-RUN yarn
+RUN npm install
 
 EXPOSE 3000
 

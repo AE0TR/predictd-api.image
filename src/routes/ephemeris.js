@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const send = require("../udp")(
-  process.env.PREDICTD_HOST || "localhost",
-  process.env.PREDICTD_PORT || 1210
-);
+const send = require("../udp")(process.env.PREDICTD_HOST, process.env.PREDICTD_PORT);
 const as = require("../as");
 
 router.get("/ephemeris/sun", (req, res) => {

@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const send = require("../udp")(
-  process.env.PREDICTD_HOST || "localhost",
-  process.env.PREDICTD_PORT || 1210
-);
+const send = require("../udp")(process.env.PREDICTD_HOST, process.env.PREDICTD_PORT);
 const as = require("../as");
 
 router.get(["/sys", "/sys/qth"], (req, res) => {
@@ -20,6 +17,10 @@ router.get(["/sys", "/sys/qth"], (req, res) => {
   });
 });
 
+router.get("/sys/tle", (req, res) => {
+  send("RELOAD_TLE").then((data) => res.json("tle reloaded"));
+});
+
 router.get("/sys/version", (req, res) => {
   send("GET_VERSION").then((data) => res.json(data.trim()));
 });
@@ -30,10 +31,6 @@ router.get("/sys/mode", (req, res) => {
 
 router.get("/sys/time", (req, res) => {
   send("GET_TIME").then((data) => res.json(+data.trim()));
-});
-
-router.get("/sys/tle", (req, res) => {
-  send("RELOAD_TLE").then((data) => res.json("tle reloaded"));
 });
 
 module.exports = router;

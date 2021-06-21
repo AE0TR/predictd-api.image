@@ -4,9 +4,9 @@ const cors = require("cors");
 const swagger = require("swagger-ui-express")
 const swaggerdoc = require("./swagger.json")
 
-const satRoute = require("./routes/satellites");
-const sysRoute = require("./routes/predict");
 const ephemRoute = require("./routes/ephemeris");
+const satRoute = require("./routes/satellites");
+const sysRoute = require("./routes/sys");
 
 const server = require("./settings");
 
@@ -16,6 +16,7 @@ app.use('/api-docs', swagger.serve, swagger.setup(swaggerdoc));
 app.get("/", (req, res) => res.redirect("/api-docs"));
 
 app.use(cors());
+app.options('*', cors());
 app.use(logger("combined"));
 
 app.use(`/api/${server.version}`, satRoute);
