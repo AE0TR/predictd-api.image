@@ -32,33 +32,24 @@ router.get("/satellites/:name", (req, res) => {
 });
 
 router.get("/satellites/:name/doppler", (req, res) => {
-  udp(
-    endpoint.host,
-    endpoint.port,
-    `GET_DOPPLER ${req.params.name}`
-  ).then((data) => res.json(as.scalar(data)));
+  send(`GET_DOPPLER ${req.params.name}`)
+    .then((data) => res.json(as.scalar(data)));
 });
 
 router.get("/satellites/:name/tle", (req, res) => {
-  send(`GET_TLE ${req.params.name}`).then((data) =>
-    res.json(data.trim().split("\n"))
-  );
+  send(`GET_TLE ${req.params.name}`)
+    .then((data) => res.json(data.trim().split("\n"))
+    );
 });
 
 router.get("/satellites/:name/position", (req, res) => {
-  udp(
-    endpoint.host,
-    endpoint.port,
-    `GET_SAT_POS ${req.params.name}`
-  ).then((data) => res.json(data.trim().split("\n")));
+  send(`GET_SAT_POS ${req.params.name}`)
+    .then((data) => res.json(data.trim().split("\n")));
 });
 
 router.get("/satellites/:name/predict/:start", (req, res) => {
-  udp(
-    endpoint.host,
-    endpoint.port,
-    `PREDICT ${req.params.name} ${req.params.start}`
-  ).then((data) => res.json(data.trim().split("\n")));
+  send(`PREDICT ${req.params.name} ${req.params.start}`)
+    .then((data) => res.json(data.trim().split("\n")));
 });
 
 router.get("/satellites/:name/predict", (req, res) => {
