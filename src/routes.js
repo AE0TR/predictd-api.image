@@ -17,10 +17,9 @@ router.get("/", (req, res) => {
         "longitude",
         "altitude",
       ]),
-      version,
-      mode,
-      time,
-      url:`http://${settings.host}:${settings.port}/api-docs/`
+      version:version.trim(),
+      mode:mode.trim(),
+      time:+time.trim()
     }))
 })
 

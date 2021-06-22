@@ -11,6 +11,7 @@ const server = require("./settings");
 const app = express();
 
 app.use('/api-docs', swagger.serve, swagger.setup(swaggerdoc));
+app.use('/', (req, res) => res.redirect('/api-docs'))
 
 app.use(cors());
 app.options('*', cors());
