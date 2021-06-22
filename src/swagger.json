@@ -11,10 +11,27 @@
   },
   "host": "station.local:3000",
   "basePath": "/api/v1",
-  "schemes": ["http", "https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
+    "/": {
+      "get": {
+        "summary": "Get metadata about the predict process.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/satellites": {
       "get": {
         "summary": "Get a list of satellites in the predict database.",
@@ -139,76 +156,6 @@
             "description": "The start time for the requested prediction."
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/sys": {
-      "get": {
-        "summary": "Get location data.",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/sys/version": {
-      "get": {
-        "summary": "Get the version of predict.",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/sys/mode": {
-      "get": {
-        "summary": "Get current mode of predict.",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/sys/time": {
-      "get": {
-        "summary": "Get the system time.",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/sys/tle": {
-      "get": {
-        "summary": "Reload the TLE files.",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/ephemeris/sun": {
-      "get": {
-        "summary": "Get ephemeris information about the sun.",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/ephemeris/moon": {
-      "get": {
-        "summary": "Get ephemeris information about the moon.",
         "responses": {
           "200": {
             "description": "Success"

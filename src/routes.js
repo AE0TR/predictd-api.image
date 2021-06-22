@@ -1,7 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const send = require("../udp")(process.env.PREDICTD_HOST, process.env.PREDICTD_PORT);
-const as = require("../as");
+const send = require("./udp")(process.env.PREDICTD_HOST, process.env.PREDICTD_PORT);
+const as = require("./as");
+const settings = require("./settings");
+
+router.get("/", (req, res) => {
+  Promise.all([
+    send("GET_QTH"),
+    send("GET_VERSION"),
+    send("GET_MODE"),
+    send("GET_TIME")])
+    .then(([qth, version, mode, time]) => res.json({
+      qth: as.obj(qth, [
+        "callsign",
+        "latitude",
+        "longitude",
+        "altitude",
+      ]),
+      version,
+      mode,
+      time,
+      url:`http://${settings.host}:${settings.port}/api-docs/`
+    }))
+})
 
 router.get("/satellites", (req, res) => {
   send("GET_LIST").then((data) => res.json(as.array(data)));
