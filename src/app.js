@@ -10,11 +10,12 @@ const server = require("./settings");
 
 const app = express();
 
+app.get('/', (_, res) => res.redirect('/api-docs'));
 app.use('/api-docs', swagger.serve, swagger.setup(swaggerdoc));
-app.use('/', (req, res) => res.redirect('/api-docs'))
 
 app.use(cors());
 app.options('*', cors());
+
 app.use(logger("combined"));
 
 app.use(`/api/${server.version}`, routes);

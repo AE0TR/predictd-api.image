@@ -9,7 +9,6 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "station.local:3000",
   "basePath": "/api/v1",
   "schemes": [
     "http",
@@ -61,7 +60,7 @@
         }
       }
     },
-    "satellites/{name}/doppler": {
+    "/satellites/{name}/doppler": {
       "get": {
         "summary": "Get dopper information about a specific satellite.",
         "parameters": [
